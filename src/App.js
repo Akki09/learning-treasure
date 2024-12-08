@@ -24,9 +24,11 @@ const App = () => {
     "Tell me and I forget. Teach me and I remember. Involve me and I learn. — Benjamin Franklin"
   ];
 
+  //const response = await fetch('http://localhost:5000/api/folders');
+  // when working local use localhost
   useEffect(() => {
     const fetchFolders = async () => {
-      const response = await fetch('http://localhost:5000/api/folders');
+      const response = await fetch('https://learning-treasure.onrender.com/api/folders');
       const folderData = await response.json();
       setFolders(folderData);
     };
@@ -70,8 +72,10 @@ const App = () => {
   const handleFileClick = (fileName) => {
     if (!selectedFolder) return;
 
+    // when working local use local host 
+    //fetch(`http://localhost:5000/api/files/${folderName}/${fileName}`)
     const folderName = selectedFolder.name;
-    fetch(`http://localhost:5000/api/files/${folderName}/${fileName}`)
+    fetch(`https://learning-treasure.onrender.com/api/files/${folderName}/${fileName}`)
       .then((res) => res.json())
       .then((data) => {
         setFileContent(data.content);
