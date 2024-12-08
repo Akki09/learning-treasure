@@ -16,7 +16,7 @@ const getFilesInDirectory = (dirPath) => {
 
 // API to get folder structure dynamically from the 'DSA' directory
 app.get("/api/folders", (req, res) => {
-  const dsaFolderPath = path.join(__dirname, "public", "DSA"); // Main folder is DSA
+  const dsaFolderPath = path.join(__dirname, "build", "DSA"); // Main folder is DSA
   const folders = fs.readdirSync(dsaFolderPath).filter(folder => fs.lstatSync(path.join(dsaFolderPath, folder)).isDirectory());
 
   const folderStructure = folders.map(folder => ({
