@@ -17,9 +17,12 @@ const getFilesInDirectory = (dirPath) => {
 // Serve static files from the React build directory
 app.use(express.static(path.join(__dirname, "build")));
 
-// API to get folder structure dynamically from the 'DSA' directory
+// Serve DSA folder as a static asset
+app.use('/public', express.static(path.join(__dirname, "public")));
+
+// API to get folder structure dynamically from the 'DSA' directory inside the public folder
 app.get("/api/folders", (req, res) => {
-  const dsaFolderPath = path.join(__dirname, "build", "DSA"); // Main folder is DSA
+  const dsaFolderPath = path.join(__dirname, "public", "DSA"); // Correct path to DSA folder inside public
   const folders = fs.readdirSync(dsaFolderPath).filter(folder => fs.lstatSync(path.join(dsaFolderPath, folder)).isDirectory());
 
   const folderStructure = folders.map(folder => ({
@@ -33,7 +36,7 @@ app.get("/api/folders", (req, res) => {
 // API to get content of a specific file
 app.get("/api/files/:folder/:file", (req, res) => {
   const { folder, file } = req.params;
-  const filePath = path.join(__dirname, "build", "DSA", folder, file); // Construct the file path
+  const filePath = path.join(__dirname, "public", "DSA", folder, file); // Corrected path to file inside public folder
 
   if (fs.existsSync(filePath)) {
     const content = fs.readFileSync(filePath, "utf-8");
