@@ -1,0 +1,12 @@
+go insde folder structure
+/Users/Akki/folder-viewer
+
+// start node server
+node server.js
+
+// start application
+npm run build(optional)
+npm start
+
+// to delete the .DS_Store file
+find . -name ".DS_Store" -type f -delete
