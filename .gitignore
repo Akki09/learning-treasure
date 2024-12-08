@@ -9,8 +9,8 @@
 /coverage
 
 # production
-/build/*
-!/build/DSA/
+/build/
+#!/build/DSA/
 
 # misc
 .DS_Store
