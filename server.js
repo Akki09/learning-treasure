@@ -14,6 +14,9 @@ const getFilesInDirectory = (dirPath) => {
     .filter(file => fs.lstatSync(path.join(dirPath, file)).isFile());
 };
 
+// Serve static files from the React build directory
+app.use(express.static(path.join(__dirname, "build")));
+
 // API to get folder structure dynamically from the 'DSA' directory
 app.get("/api/folders", (req, res) => {
   const dsaFolderPath = path.join(__dirname, "build", "DSA"); // Main folder is DSA
@@ -40,7 +43,11 @@ app.get("/api/files/:folder/:file", (req, res) => {
   }
 });
 
+// Serve React's index.html for any route not matching the API
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
