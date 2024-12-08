@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown"; // For markdown rendering
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"; // For syntax highlighting
 import { FiClipboard } from 'react-icons/fi'; // Import the clipboard icon
@@ -6,6 +6,7 @@ import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'; // Dra
 
 const FileViewer = ({ content }) => {
   const [copiedIndex, setCopiedIndex] = useState(null); // Track which code block was copied
+  const contentRef = useRef(null); // Reference to the content container
 
   // Function to copy content to clipboard
   const handleCopy = (text, index) => {
@@ -19,8 +20,15 @@ const FileViewer = ({ content }) => {
     });
   };
 
+  // Reset scroll position to the top whenever content changes
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0; // Reset scroll position to top
+    }
+  }, [content]); // Trigger effect when content changes
+
   return (
-    <div className="bg-gray-50 shadow-md rounded-md p-6 relative">
+    <div ref={contentRef} className="bg-gray-50 shadow-md rounded-md p-6 relative h-full overflow-y-auto">
       {/* Display file content */}
       <ReactMarkdown
         children={content}
