@@ -30,7 +30,7 @@ app.get("/api/folders", (req, res) => {
 // API to get content of a specific file
 app.get("/api/files/:folder/:file", (req, res) => {
   const { folder, file } = req.params;
-  const filePath = path.join(__dirname, "public", "DSA", folder, file); // Construct the file path
+  const filePath = path.join(__dirname, "build", "DSA", folder, file); // Construct the file path
 
   if (fs.existsSync(filePath)) {
     const content = fs.readFileSync(filePath, "utf-8");
