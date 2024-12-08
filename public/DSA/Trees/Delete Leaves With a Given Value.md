@@ -1,4 +1,3 @@
-1325. Delete Leaves With a Given Value
 # Q : [Delete Leaves With a Given Value](https://leetcode.com/problems/delete-leaves-with-a-given-value/description/)
 Given a binary tree root and an integer target, delete all the leaf nodes with value target.
 
